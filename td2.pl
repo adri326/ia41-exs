@@ -47,7 +47,7 @@ equi([X | R1], [X | R2]) :- R1 \= R2, equi(R1, R2).
 cons_liste_ordonnee(L1, L2, L3) :- concat(L1, L2, L), sort(L, L3).
 
 % selectionner(?X, ?L1, ?L2), with {Π A: Universe u}, L1: List(A), L2: List(A)
-% Trye if L2 is L1, missing an occurence of X
+% True if L2 is L1, missing an occurence of X
 selectionner(X, [X | R], R).
 selectionner(X, [Y | L1], [Y | L2]) :- selectionner(X, L1, L2).
 
