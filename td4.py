@@ -1,5 +1,7 @@
 #!/bin/env python
 
+import math
+
 file_tree = {
     'rep1': {
         'rep3': {'auto': 0, 'moto': 0, 'velo': 0},
@@ -99,3 +101,47 @@ def missionaires(state, path):
         return best
 
 print(missionaires((3, 3, 0), []))
+
+taquin_closed = []
+taquin_target = [1, 2, 3, 8, 9, 4, 7, 6, 5]
+def taquin(state, path):
+    if len(path) > 20:
+        return None
+    # print(state, path)
+    taquin_closed.append(''.join([str(s) for s in state]))
+    # print(taquin_closed)
+    x = 0
+    y = 0
+    for i in range(0, 9):
+        if state[i] == 9:
+            x = i % 3
+            y = math.floor(i / 3)
+    if state == taquin_target:
+        return path
+
+    candidates = []
+    def add_candidate(dx, dy):
+        candidate = state.copy() # Shallow copy
+        candidate[x + y * 3] = candidate[x + dx + (y + dy) * 3]
+        candidate[x + dx + (y + dy) * 3] = 9
+        candidates.append(candidate)
+    if x > 0:
+        add_candidate(-1, 0)
+    if x < 2:
+        add_candidate(1, 0)
+    if y > 0:
+        add_candidate(0, -1)
+    if y < 2:
+        add_candidate(0, 1)
+
+    best = None
+    for candidate in candidates:
+        if ''.join([str(c) for c in candidate]) in taquin_closed:
+            continue
+        x = taquin(candidate, path + [candidate])
+        if x != None:
+            if best == None or len(x) < len(best):
+                best = x
+    return best
+
+print(taquin([2, 8, 3, 1, 6, 4, 7, 9, 5], []))
