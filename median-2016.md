@@ -155,19 +155,19 @@ H3 = ¬Ecluse ∨ Mer'
 H4 = Maree
 ```
 
-Soit `Γ := {H1, H2, H3, H4}`.
+Soit `Γ := H1 ∪ H2 ∪ H3 ∪ H4`.
 
 #### C₁ = H4, C₂ = H2:
 
 - Soit `σ = []`, `θ = []`, `I₁ = Maree` et `I₂ = Maree`.
 - On a `R1 = σ(θ(H4 \ {Maree}) ∪ H2 \ {¬Maree}) = σ(θ({}) ∪ {Ecluse}) = Ecluse`,
-- Et `Γ := {H1, H2, H3, H4, {Ecluse}}`.
+- Et `Γ := H1 ∪ H2 ∪ H3 ∪ H4 ∪ {Ecluse}`.
 
 #### C₁ = R1, C₂ = H3:
 
 - Soit `σ = []`, `θ = []`, `I₁ = Ecluse` et `I₂ = Ecluse`.
 - On a `R2 = σ(θ(R1 \ {Maree}) ∪ H3 \ {¬Maree}) = σ(θ({}) ∪ {Mer'}) = Mer'`,
-- Et `Γ := {H1, H2, H3, H4, {Ecluse}, {Mer'}}`.
+- Et `Γ := H1 ∪ H2 ∪ H3 ∪ H4 ∪ {Ecluse, Mer'}`.
 
 #### Conclusion
 
