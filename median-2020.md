@@ -174,9 +174,14 @@ R3: ¬(BO ∧ B) :=
 ```
 
 ```
+
 R4: ¬BO ∧ M :=
     ¬(BO ∧ B) (R3)    (BO ∧ B) ∨ (¬BO ∧ M) (R2)
-    ------------------------------------------- Résolution avec BO ∧ B
+    ------------------------------------------- (or-distribution)
+    (¬(BO ∧ B) ∧ (BO ∧ B)) ∨ (¬(BO ∧ B) ∧ (¬BO ∧ M))
+    let (¬(BO ∧ B) ∧ (BO ∧ B)) => ¬BO ∧ M, from (x ∧ ¬x => false, false-elimination, transitivity)
+    let (¬(BO ∧ B) ∧ (¬BO ∧ M)) => ¬BO ∧ M, from (and-elimination)
+    ------------------------------------------------ (or-elimination)
     ¬BO ∧ M
 ```
 
