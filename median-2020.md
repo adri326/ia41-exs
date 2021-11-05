@@ -125,6 +125,52 @@ mult_matrix_diag(M1, M2, Res) :-
 (C) Je reste à la maison.
 ```
 
+### Dérivation de `(C)` par la méthode de résolution
+
+Nous réecrivons les formules de l'énoncé en forme standard:
+
+```
+H1: ¬G ∨ ¬E
+H2: E ∨ (BO ∧ B) ∨ (¬BO ∧ M) = (E ∨ BO ∨ ¬BO) ∧ (E ∨ BO ∨ M) ∧ (E ∨ B ∨ ¬BO) ∧ (E ∨ B ∨ M)
+H3: G ∧ ¬B
+```
+
+`Γ := H1 ∪ H2 ∪ H3`.
+
+#### C₁ = {G}, C₂ = H1
+
+- Soit `σ = []`, `θ = []`, `I₁ = I₂ = G`
+- `R1 = σ(θ({G} \ {G}) ∪ (H1 \ {¬G})) = σ({} ∪ {¬E}) = {¬E}`
+- `Γ := H1 ∪ H2 ∪ H3 ∪ {¬E}`
+
+#### C₁ = {E ∨ B ∨ ¬BO}, C₂ = R1
+
+- Soit `σ = []`, `θ = []`, `I₁ = I₂ = E`
+- `R2 = σ(θ({E ∨ B ∨ ¬BO} \ {E}) ∪ (R1 \ {¬E})) = σ({B ∨ ¬BO} ∪ {}) = {B ∨ ¬BO}`
+- `Γ := H1 ∪ H2 ∪ H3 ∪ {¬E, B ∨ ¬BO}`
+
+#### C₁ = {E ∨ BO ∨ M}, C₂ = R1
+
+- Soit `σ = []`, `θ = []`, `I₁ = I₂ = E`
+- `R2' = σ(θ({E ∨ BO ∨ M} \ {E}) ∪ (R1 \ {¬E})) = σ({BO ∨ M} ∪ {}) = {BO ∨ M}`
+- `Γ := H1 ∪ H2 ∪ H3 ∪ {¬E, B ∨ ¬BO, BO ∨ M}`
+
+#### C₁ = {B ∨ ¬BO}, C₂ = {¬B}
+
+- Soit `σ = []`, `θ = []`, `I₁ = I₂ = B`
+- `R3 = σ(θ({B ∨ ¬BO} \ {B}) ∪ ({¬B} \ {¬B})) = {¬BO}`
+- `Γ := H1 ∪ H2 ∪ H3 ∪ {¬E, B ∨ ¬BO, BO ∨ M, ¬BO}`
+
+#### C₁ = {BO ∨ M}, C₂ = {¬BO}
+
+- Soit `σ = []`, `θ = []`, `I₁ = I₂ = BO`
+- `R3 = σ(θ({BO ∨ M} \ {BO}) ∪ ({¬BO} \ {¬BO})) = {M}`
+- `Γ := H1 ∪ H2 ∪ H3 ∪ {¬E, B ∨ ¬BO, BO ∨ M, ¬BO, M}`
+
+#### Conclusion
+
+`{M} ∈ Γ`, donc on reste en effet à la maison.
+
 ### Dérivation de `(C)` en logique propositionelle
 
 Soit les constantes:
@@ -186,49 +232,3 @@ R4: ¬BO ∧ M :=
 ```
 
 D'où `{H1, H2, H3} ⊦ M`: on reste bien à la maison, car la bibliothèque n'est pas ouverte.
-
-### Dérivation de `(C)` en logique des prédicats
-
-Nous réecrivons les formules de l'énoncé en forme standard:
-
-```
-H1: ¬G ∨ ¬E
-H2: E ∨ (BO ∧ B) ∨ (¬BO ∧ M) = (E ∨ BO ∨ ¬BO) ∧ (E ∨ BO ∨ M) ∧ (E ∨ B ∨ ¬BO) ∧ (E ∨ B ∨ M)
-H3: G ∧ ¬B
-```
-
-`Γ := H1 ∪ H2 ∪ H3`.
-
-#### C₁ = {G}, C₂ = H1
-
-- Soit `σ = []`, `θ = []`, `I₁ = I₂ = G`
-- `R1 = σ(θ({G} \ {G}) ∪ (H1 \ {¬G})) = σ({} ∪ {¬E}) = {¬E}`
-- `Γ := H1 ∪ H2 ∪ H3 ∪ {¬E}`
-
-#### C₁ = {E ∨ B ∨ ¬BO}, C₂ = R1
-
-- Soit `σ = []`, `θ = []`, `I₁ = I₂ = E`
-- `R2 = σ(θ({E ∨ B ∨ ¬BO} \ {E}) ∪ (R1 \ {¬E})) = σ({B ∨ ¬BO} ∪ {}) = {B ∨ ¬BO}`
-- `Γ := H1 ∪ H2 ∪ H3 ∪ {¬E, B ∨ ¬BO}`
-
-#### C₁ = {E ∨ BO ∨ M}, C₂ = R1
-
-- Soit `σ = []`, `θ = []`, `I₁ = I₂ = E`
-- `R2' = σ(θ({E ∨ BO ∨ M} \ {E}) ∪ (R1 \ {¬E})) = σ({BO ∨ M} ∪ {}) = {BO ∨ M}`
-- `Γ := H1 ∪ H2 ∪ H3 ∪ {¬E, B ∨ ¬BO, BO ∨ M}`
-
-#### C₁ = {B ∨ ¬BO}, C₂ = {¬B}
-
-- Soit `σ = []`, `θ = []`, `I₁ = I₂ = B`
-- `R3 = σ(θ({B ∨ ¬BO} \ {B}) ∪ ({¬B} \ {¬B})) = {¬BO}`
-- `Γ := H1 ∪ H2 ∪ H3 ∪ {¬E, B ∨ ¬BO, BO ∨ M, ¬BO}`
-
-#### C₁ = {BO ∨ M}, C₂ = {¬BO}
-
-- Soit `σ = []`, `θ = []`, `I₁ = I₂ = BO`
-- `R3 = σ(θ({BO ∨ M} \ {BO}) ∪ ({¬BO} \ {¬BO})) = {M}`
-- `Γ := H1 ∪ H2 ∪ H3 ∪ {¬E, B ∨ ¬BO, BO ∨ M, ¬BO, M}`
-
-#### Conclusion
-
-`{M} ∈ Γ`, donc on reste en effet à la maison.

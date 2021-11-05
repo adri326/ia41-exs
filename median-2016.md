@@ -144,25 +144,7 @@ H3: Ecluse => Mer'
 H4: Maree
 ```
 
-### Dérivation en logique propositionelle
-
-Nous avons:
-
-```
-S1: Ecluse :=
-    H2  H4
-    ------ (modus ponens)
-    Ecluse
-
-S2: Mer' :=
-    H3  S1
-    ------ (modus ponens)
-    Mer'
-```
-
-Il nous est donc possible d'aller en mer. En revanche, aucun axiome ne nous permet de déduire `Mer` ("je vais en mer"): `H1` ne peut pas être utilisé car l'atome `Beau` n'est pas défini et aucun autre axiome ne contient `Mer`.
-
-### Résolution en logique des prédicats
+### Dérivation par résolution
 
 Nous réécrivons `H1-4` en forme standard:
 
@@ -192,3 +174,21 @@ Soit `Γ := {H1, H2, H3, H4}`.
 Il est trivial de remarquer qu'aucune nouvelle conséquence de `Γ` ne peut être trouvée: seules les deux résolutions précédentes ne pouvaient être appliquées.
 
 Ni `Mer`, ni `¬Mer` n'appartiennent à `Γ`: il ne nous est pas possible de savoir si l'on va en mer ou non, nous savons uniquement qu'il est possible d'y aller.
+
+### Dérivation en logique propositionelle
+
+Nous avons:
+
+```
+S1: Ecluse :=
+    H2  H4
+    ------ (modus ponens)
+    Ecluse
+
+S2: Mer' :=
+    H3  S1
+    ------ (modus ponens)
+    Mer'
+```
+
+Il nous est donc possible d'aller en mer. En revanche, aucun axiome ne nous permet de déduire `Mer` ("je vais en mer"): `H1` ne peut pas être utilisé car l'atome `Beau` n'est pas défini et aucun autre axiome ne contient `Mer`.
